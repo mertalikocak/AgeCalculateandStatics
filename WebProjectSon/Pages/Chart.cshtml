@@ -1,0 +1,53 @@
+﻿@page
+@model ChartModel
+@{
+}
+
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Age Range', 'Number of People'],
+                ['0-15', @Model.counterZeroFifteen ],
+                ['15-30', @Model.counterFifteenThirty ],
+                ['30-45', @Model.counterThirtyFourtyfive ],
+                ['45+',  @Model.counterFourtfivePlus]
+            ]);
+            var options = {
+                title: 'Bar chart by Age',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('mychartBar'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Gender', 'Number of People'],
+                ['Female', @Model.counterFemale ],
+                ['Male', @Model.counterMale ],
+            ]);
+            var options = {
+                title: 'Pie chart by Gender',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('mychartPie'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="mychartBar" style="width: 900px; height: 500px"></div>
+    <div id="mychartPie" style="width: 900px; height: 500px"></div>
+</body>
+</html>
+

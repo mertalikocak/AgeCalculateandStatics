@@ -1,0 +1,66 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<script src="~/js/site.js" > </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<div class="text-center" id="mainform">
+    <h1 class="display-4">Age Calculation and Statistics</h1>
+
+    <form method="post">
+
+        <label for="personName">Name</label>
+        <span asp-validation-for="personName" class="field-validation-valid" data-valmsg-for="personName" data-valmsg-replace="true"></span>
+        <br />
+        <input type="text" onkeydown="return /[a-z,ö,ç,ş,ü,i,ğ,İ,ı ]/i.test(event.key)" id="personName" pattern="[A-Za-z]" name="personName" data-val="true" minlength="3" data-val-required="The name field is required." value="" asp-for="personName" />
+        <br />
+
+        <label for="personSurname">Surname</label>
+        <span asp-validation-for="personSurname" class="field-validation-valid" data-valmsg-for="personSurname" data-valmsg-replace="true"></span>
+        <br />
+        <input type="text" onkeydown="return /[a-z,ö,ç,ş,ü,i,ğ,İ,ı ]/i.test(event.key)" id="personSurname" name="personSurname" pattern="[A-Za-z]" data-val="true" minlength="3" data-val-required="The surname field is required." value="" asp-for="personSurname" />
+        <br /> <br />
+
+
+        <label for="personBdate">Birth Date</label>
+        <input id="datefield" type="date" data-val="true" value="2000-01-01" asp-for="personBdate" />
+        <br />
+
+
+        <label for="sex">Sex</label>
+        <select name="sex" asp-for="sex" required>
+            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+
+
+        <label for="personCity">City</label>
+        <select name="City" asp-for="city" required>
+            @foreach (var city in Model.listCity)
+            {
+                <option value="@city.name">@city.name</option>
+            }
+
+        </select>
+        <br />
+        <input type="submit" onclick="" value="Calculate" />
+        <br />
+        <div class="message">@Model.message</div>
+
+    </form>
+
+</div>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/jquery.js"></script>
+    <script src="~/lib/jquery.validate.js"></script>
+    <script src="~/lib/jquery.validate.unobtrusive.js"></script>
+}
+

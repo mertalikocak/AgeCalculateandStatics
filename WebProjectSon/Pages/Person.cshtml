@@ -1,0 +1,44 @@
+﻿@page
+@model WebProjectSon.Pages.PersonModel
+@{
+}
+<h2>List of People</h2>
+
+<form  method="post">
+    <input type="text"  placeholder="Search.." name="search" asp-for="search">
+    <input type="submit" value="Search"  asp-page-handler="Search" />
+</form>
+<br />
+<form method="post">
+    <select name="order" asp-for="order">
+        <option value="0">sort by inserting time </option>
+        <option value="1">ascending sort by age</option>
+        <option value="2">descending sort by age</option>
+    </select>
+    <input type="submit" value="Order" asp-page-handler="Order" />
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>City</th>
+        </tr>
+    </thead>
+
+    @foreach (var person in Model.listPerson)
+    {
+        <tbody>
+        <th>@person.personName</th>
+        <th>@person.personSurname</th>
+        <th>@person.personBdate</th>
+        <th>@person.sex</th>
+        <th>@person.city</th>
+        </tbody>
+    }
+
+</table>
